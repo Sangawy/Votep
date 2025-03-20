@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سیستەمی بەڕێوەبردنی ئەندامان</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #4caf50;
+            --light-color: #e8f5e9;
+            --dark-color: #1b5e20;
+            --danger-color: #d32f2f;
+            --warning-color: #ff9800;
+            --text-color: #333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Tahoma, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .form-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+            background-color: var(--light-color);
+            padding: 0 2rem;
+        }
+        
+        .form-container.active {
+            max-height: 800px;
+            padding: 2rem;
+        }
+        
+        .toggle-form {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .toggle-form:hover {
+            background-color: var(--dark-color);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        button:hover {
+            background-color: var(--dark-color);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger-color);
+        }
+        
+        .btn-danger:hover {
+            background-color: #b71c1c;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning-color);
+        }
+        
+        .btn-warning:hover {
+            background-color: #e65100;
+        }
+        
+        .table-container {
+            padding: 1rem 2rem 2rem;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: right;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        tr:hover {
+            background-color: #e8f5e9;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        
+        .action-btn {
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .edit-btn {
+            background-color: var(--warning-color);
+            color: white;
+        }
+        
+        .delete-btn {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .search-container {
+            margin: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .search-input {
+            flex: 1;
+            max-width: 300px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+        
+        .search-btn {
+            margin-right: 10px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            gap: 0.5rem;
+        }
+        
+        .pagination button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .pagination button.active {
+            background-color: var(--dark-color);
+        }
+        
+        .error-message {
+            color: var(--danger-color);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+        
+        .success-message {
+            background-color: #dff0d8;
+            color: #3c763d;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: var(--border-radius);
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>سیستەمی بەڕێوەبردنی ئەندامان</h1>
+        </header>
+        
+        <button class="toggle-form">
+            <i class="fas fa-plus"></i> زیادکردنی ئەندامی نوێ
+        </button>
+        
+        <div class="form-container">
+            <h2>فۆڕمی زیادکردنی ئەندام</h2>
+            <form id="memberForm">
+                <input type="hidden" id="memberId" value="">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="member_id">ژمارەی ئەندام</label>
+                        <input type="text" id="member_id" name="member_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">ناو</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="education_level">ئاستی خوێندن</label>
+                        <select id="education_level" name="education_level">
+                            <option value="سەرەتایی">سەرەتایی</option>
+                            <option value="ناوەندی">ناوەندی</option>
+                            <option value="ئامادەیی">ئامادەیی</option>
+                            <option value="دبلۆم">دبلۆم</option>
+                            <option value="بەکالۆریۆس">بەکالۆریۆس</option>
+                            <option value="ماستەر">ماستەر</option>
+                            <option value="دکتۆرا">دکتۆرا</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">ناونیشان</label>
+                        <input type="text" id="address" name="address">
+                    </div>
+                    <div class="form-group">
+                        <label for="date_of_birth">بەرواری لەدایکبوون</label>
+                        <input type="date" id="date_of_birth" name="date_of_birth">
+                    </div>
+                    <div class="form-group">
+                        <label for="family">خێزان</label>
+                        <input type="text" id="family" name="family">
+                    </div>
+                    <div class="form-group">
+                        <label for="language">زمان</label>
+                        <input type="text" id="language" name="language">
+                    </div>
+                    <div class="form-group">
+                        <label for="membership_date">بەرواری ئەندامێتی</label>
+                        <input type="date" id="membership_date" name="membership_date">
+                    </div>
+                    <div class="form-group">
+                        <label for="occupation">پیشە</label>
+                        <input type="text" id="occupation" name="occupation">
+                    </div>
+                    <div class="form-group">
+                        <label for="blood_type">گروپی خوێن</label>
+                        <select id="blood_type" name="blood_type">
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">ژمارەی مۆبایل</label>
+                        <input type="tel" id="phone_number" name="phone_number">
+                    </div>
+                    <div class="form-group">
+                        <label for="photo">وێنە</label>
+                        <input type="file" id="photo" name="photo">
+                    </div>
+                    <div class="form-group">
+                        <label for="person_id_card">ژمارەی ناسنامە</label>
+                        <input type="text" id="person_id_card" name="person_id_card">
+                    </div>
+                    <div class="form-group">
+                        <label for="health_id_card">ژمارەی کارتی تەندروستی</label>
+                        <input type="text" id="health_id_card" name="health_id_card">
+                    </div>
+                </div>
+                
+                <div class="form-actions" style="margin-top: 1rem;">
+                    <button type="submit" id="saveBtn">
+                        <i class="fas fa-save"></i> پاشەکەوتکردن
+                    </button>
+                    <button type="button" id="resetBtn" class="btn-warning" style="margin-right: 10px;">
+                        <i class="fas fa-redo"></i> پاککردنەوە
+                    </button>
+                </div>
+            </form>
+            <div class="success-message" id="successMessage"></div>
+        </div>
+        
+        <div class="table-container">
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="گەڕان...">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i> گەڕان
+                </button>
+            </div>
+            
+            <table id="membersTable">
+                <thead>
+                    <tr>
+                        <th>ژمارەی ئەندام</th>
+                        <th>ناو</th>
+                        <th>ئاستی خوێندن</th>
+                        <th>ناونیشان</th>
+                        <th>بەرواری لەدایکبوون</th>
+                        <th>خێزان</th>
+                        <th>زمان</th>
+                        <th>بەرواری ئەندامێتی</th>
+                        <th>پیشە</th>
+                        <th>گروپی خوێن</th>
+                        <th>ژمارەی مۆبایل</th>
+                        <th>ژمارەی ناسنامە</th>
+                        <th>ژمارەی کارتی تەندروستی</th>
+                        <th>کردارەکان</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Data will be loaded here -->
+                </tbody>
+            </table>
+            
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be generated here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data to simulate database
+        let members = [];
+        const ITEMS_PER_PAGE = 10;
+        let currentPage = 1;
+        
+        // DOM Elements
+        const toggleFormBtn = document.querySelector('.toggle-form');
+        const formContainer = document.querySelector('.form-container');
+        const memberForm = document.getElementById('memberForm');
+        const resetBtn = document.getElementById('resetBtn');
+        const tableBody = document.getElementById('tableBody');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.querySelector('.search-btn');
+        const paginationContainer = document.getElementById('pagination');
+        const successMessage = document.getElementById('successMessage');
+        
+        // Toggle form visibility
+        toggleFormBtn.addEventListener('click', () => {
+            formContainer.classList.toggle('active');
+            if (formContainer.classList.contains('active')) {
+                toggleFormBtn.innerHTML = '<i class="fas fa-minus"></i> شاردنەوەی فۆڕم';
+            } else {
+                toggleFormBtn.innerHTML = '<i class="fas fa-plus"></i> زیادکردنی ئەندامی نوێ';
+            }
+        });
+        
+        // Reset form
+        resetBtn.addEventListener('click', () => {
+            memberForm.reset();
+            document.getElementById('memberId').value = '';
+            document.getElementById('saveBtn').innerHTML = '<i class="fas fa-save"></i> پاشەکەوتکردن';
+        });
+        
+        // Handle form submission
+        memberForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const memberData = {};
+            
+            for (const [key, value] of formData.entries()) {
+                if (key !== 'photo') {
+                    memberData[key] = value;
+                }
+            }
+            
+            const memberId = document.getElementById('memberId').value;
+            
+            if (memberId) {
+                // Update existing member
+                const index = members.findIndex(m => m.id === memberId);
+                if (index !== -1) {
+                    members[index] = { ...members[index], ...memberData, id: memberId };
+                    showSuccessMessage('ئەندام بە سەرکەوتوویی نوێکرایەوە');
+                }
+            } else {
+                // Add new member
+                const newId = Date.now().toString();
+                members.push({ ...memberData, id: newId });
+                showSuccessMessage('ئەندام بە سەرکەوتوویی زیادکرا');
+            }
+            
+            // Reset form and refresh table
+            resetBtn.click();
+            renderTable();
+        });
+        
+        // Show success message
+        function showSuccessMessage(message) {
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Generate table rows
+        function renderTable(filteredData = null) {
+            const data = filteredData || members;
+            tableBody.innerHTML = '';
+            
+            // Calculate pagination
+            const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
+            const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+            const paginatedData = data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+            
+            if (paginatedData.length === 0) {
+                const emptyRow = document.createElement('tr');
+                emptyRow.innerHTML = `<td colspan="14" style="text-align: center;">هیچ داتایەک نییە</td>`;
+                tableBody.appendChild(emptyRow);
+            } else {
+                paginatedData.forEach(member => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${member.member_id || ''}</td>
+                        <td>${member.name || ''}</td>
+                        <td>${member.education_level || ''}</td>
+                        <td>${member.address || ''}</td>
+                        <td>${member.date_of_birth || ''}</td>
+                        <td>${member.family || ''}</td>
+                        <td>${member.language || ''}</td>
+                        <td>${member.membership_date || ''}</td>
+                        <td>${member.occupation || ''}</td>
+                        <td>${member.blood_type || ''}</td>
+                        <td>${member.phone_number || ''}</td>
+                        <td>${member.person_id_card || ''}</td>
+                        <td>${member.health_id_card || ''}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn edit-btn" data-id="${member.id}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="action-btn delete-btn" data-id="${member.id}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+            
+            // Update pagination controls
+            renderPagination(totalPages);
+            
+            // Add event listeners to action buttons
+            addActionListeners();
+        }
+        
+        // Generate pagination controls
+        function renderPagination(totalPages) {
+            paginationContainer.innerHTML = '';
+            
+            if (totalPages <= 1) return;
+            
+            // Previous button
+            const prevBtn = document.createElement('button');
+            prevBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderTable();
+                }
+            });
+            paginationContainer.appendChild(prevBtn);
+            
+            // Page buttons
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.textContent = i;
+                pageBtn.classList.toggle('active', i === currentPage);
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderTable();
+                });
+                paginationContainer.appendChild(pageBtn);
+            }
+            
+            // Next button
+            const nextBtn = document.createElement('button');
+            nextBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderTable();
+                }
+            });
+            paginationContainer.appendChild(nextBtn);
+        }
+        
+        // Add event listeners to action buttons
+        function addActionListeners() {
+            // Edit buttons
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const memberId = this.getAttribute('data-id');
+                    editMember(memberId);
+                });
+            });
+            
+            // Delete buttons
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const memberId = this.getAttribute('data-id');
+                    deleteMember(memberId);
+                });
+            });
+        }
+        
+        // Edit member
+        function editMember(id) {
+            const member = members.find(m => m.id === id);
+            if (!member) return;
+            
+            // Populate form with member data
+            document.getElementById('memberId').value = member.id;
+            document.getElementById('member_id').value = member.member_id || '';
+            document.getElementById('name').value = member.name || '';
+            document.getElementById('education_level').value = member.education_level || '';
+            document.getElementById('address').value = member.address || '';
+            document.getElementById('date_of_birth').value = member.date_of_birth || '';
+            document.getElementById('family').value = member.family || '';
+            document.getElementById('language').value = member.language || '';
+            document.getElementById('membership_date').value = member.membership_date || '';
+            document.getElementById('occupation').value = member.occupation || '';
+            document.getElementById('blood_type').value = member.blood_type || '';
+            document.getElementById('phone_number').value = member.phone_number || '';
+            document.getElementById('person_id_card').value = member.person_id_card || '';
+            document.getElementById('health_id_card').value = member.health_id_card || '';
+            
+            // Change button text
+            document.getElementById('saveBtn').innerHTML = '<i class="fas fa-edit"></i> نوێکردنەوە';
+            
+            // Show form if it's hidden
+            formContainer.classList.add('active');
+            toggleFormBtn.innerHTML = '<i class="fas fa-minus"></i> شاردنەوەی فۆڕم';
+            
+            // Scroll to form
+            formContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Delete member
+        function deleteMember(id) {
+            if (confirm('دڵنیایت لە سڕینەوەی ئەم ئەندامە؟')) {
+                members = members.filter(m => m.id !== id);
+                showSuccessMessage('ئەندام بە سەرکەوتوویی سڕایەوە');
+                renderTable();
+            }
+        }
+        
+        // Search functionality
+        searchBtn.addEventListener('click', performSearch);
+        searchInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+        
+        function performSearch() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            
+            if (searchTerm === '') {
+                renderTable();
+                return;
+            }
+            
+            const filteredData = members.filter(member => {
+                return Object.values(member).some(value => 
+                    value && value.toString().toLowerCase().includes(searchTerm)
+                );
+            });
+            
+            currentPage = 1;
+            renderTable(filteredData);
+        }
+        
+        // Load sample data
+        function loadSampleData() {
+            members = [
+                {
+                    id: '1',
+                    member_id: '1001',
+                    name: 'ئازاد محمد',
+                    education_level: 'بەکالۆریۆس',
+                    address: 'سلێمانی',
+                    date_of_birth: '1985-05-15',
+                    family: '3',
+                    language: 'کوردی، عەرەبی، ئینگلیزی',
+                    membership_date: '2020-01-10',
+                    occupation: 'مامۆستا',
+                    blood_type: 'O+',
+                    phone_number: '07501234567',
+                    person_id_card: '123456789',
+                    health_id_card: 'H12345'
+                },
+                {
+                    id: '2',
+                    member_id: '1002',
+                    name: 'ساکار ئەحمەد',
+                    education_level: 'ماستەر',
+                    address: 'هەولێر',
+                    date_of_birth: '1990-03-20',
+                    family: '2',
+                    language: 'کوردی، ئینگلیزی',
+                    membership_date: '2019-11-15',
+                    occupation: 'دکتۆر',
+                    blood_type: 'A+',
+                    phone_number: '07709876543',
+                    person_id_card: '987654321',
+                    health_id_card: 'H54321'
+                }
+            ];
+            
+            renderTable();
+        }
+        
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSampleData();
+        });
+    </script>
+</body>
+</html>
