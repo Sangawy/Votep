@@ -2,697 +2,599 @@
 <html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سیستەمی بەڕێوەبردنی ئەندامان</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Siya Shop - چاپی پسوڵە</title>
     <style>
-        :root {
-            --primary-color: #2e7d32;
-            --secondary-color: #4caf50;
-            --light-color: #e8f5e9;
-            --dark-color: #1b5e20;
-            --danger-color: #d32f2f;
-            --warning-color: #ff9800;
-            --text-color: #333;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, Tahoma, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
-        
+
         body {
-            background-color: #f5f5f5;
-            color: var(--text-color);
-            line-height: 1.6;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            max-width: 100vw;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+
+        /* Header with Logo */
+        .app-header {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            background: white;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .app-header h1 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .app-header p {
+            color: #666;
+            font-size: 1em;
+        }
+
+        /* Form Container */
+        .form-container {
             padding: 20px;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            overflow: hidden;
+
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-        
-        header {
-            background-color: var(--primary-color);
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Total Display */
+        .total-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 1rem;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
             text-align: center;
         }
-        
-        .form-container {
-            max-height: 0;
-            overflow: hidden;
-            transition: var(--transition);
-            background-color: var(--light-color);
-            padding: 0 2rem;
+
+        .total-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-bottom: 8px;
         }
-        
-        .form-container.active {
-            max-height: 800px;
-            padding: 2rem;
-        }
-        
-        .toggle-form {
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            display: block;
-            margin: 20px auto;
-            font-size: 1rem;
-            transition: var(--transition);
-            box-shadow: var(--box-shadow);
-        }
-        
-        .toggle-form:hover {
-            background-color: var(--dark-color);
-        }
-        
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
+
+        .total-amount {
+            font-size: 2.2em;
             font-weight: bold;
         }
-        
-        input, select {
+
+        /* Print Button */
+        .btn-print {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-        }
-        
-        button {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: var(--border-radius);
+            padding: 18px;
+            font-size: 1.2em;
+            border-radius: 15px;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
             cursor: pointer;
-            font-size: 1rem;
-            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
         }
-        
-        button:hover {
-            background-color: var(--dark-color);
+
+        .btn-print:active {
+            transform: scale(0.98);
         }
-        
-        .btn-danger {
-            background-color: var(--danger-color);
+
+        /* Receipt Styles */
+        .receipt {
+            display: none;
         }
-        
-        .btn-danger:hover {
-            background-color: #b71c1c;
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+
+            .app-header,
+            .form-container {
+                display: none !important;
+            }
+
+            .receipt {
+                display: block !important;
+                width: 80mm;
+                margin: 0;
+                padding: 5mm;
+                font-family: 'Courier New', monospace;
+                font-size: 10pt;
+                direction: rtl;
+                text-align: right;
+            }
+
+            @page {
+                size: 80mm auto;
+                margin: 0;
+            }
         }
-        
-        .btn-warning {
-            background-color: var(--warning-color);
-        }
-        
-        .btn-warning:hover {
-            background-color: #e65100;
-        }
-        
-        .table-container {
-            padding: 1rem 2rem 2rem;
-            overflow-x: auto;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-        
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
+
+        .receipt {
+            width: 80mm;
+            margin: 0 auto;
+            padding: 10px;
+            background: white;
+            font-family: 'Courier New', monospace;
+            direction: rtl;
             text-align: right;
         }
-        
-        th {
-            background-color: var(--primary-color);
-            color: white;
-            position: sticky;
-            top: 0;
+
+        .receipt-logo {
+            text-align: center;
+            margin-bottom: 10px;
         }
-        
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+
+        .receipt-logo img {
+            width: 35mm;
+            height: 35mm;
+            object-fit: contain;
         }
-        
-        tr:hover {
-            background-color: #e8f5e9;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-        }
-        
-        .action-btn {
-            padding: 6px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .edit-btn {
-            background-color: var(--warning-color);
-            color: white;
-        }
-        
-        .delete-btn {
-            background-color: var(--danger-color);
-            color: white;
-        }
-        
-        .search-container {
-            margin: 1rem 0;
+
+        .receipt-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            direction: rtl;
         }
-        
-        .search-input {
+
+        .receipt-header-text {
             flex: 1;
-            max-width: 300px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            font-size: 1rem;
+            text-align: right;
+            padding-left: 5mm;
         }
-        
-        .search-btn {
-            margin-right: 10px;
+
+        .receipt-header h2 {
+            font-size: 18pt;
+            margin-bottom: 5px;
+            direction: ltr;
+            text-align: right;
         }
-        
-        .pagination {
+
+        .receipt-header p {
+            font-size: 9pt;
+            margin: 2px 0;
+        }
+
+        .receipt-info {
+            font-size: 9pt;
+            margin-bottom: 10px;
+            text-align: right;
+        }
+
+        .receipt-info-row {
             display: flex;
-            justify-content: center;
-            margin-top: 1rem;
-            gap: 0.5rem;
+            justify-content: space-between;
+            margin: 3px 0;
+            direction: rtl;
         }
-        
-        .pagination button {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+
+        .receipt-section {
+            border-top: 1px dashed #000;
+            border-bottom: 1px dashed #000;
+            padding: 8px 0;
+            margin: 8px 0;
+            font-size: 9pt;
+            text-align: right;
+        }
+
+        .receipt-section div {
+            margin: 4px 0;
+            font-size: 9pt;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
+            justify-content: space-between;
+            direction: rtl;
         }
-        
-        .pagination button.active {
-            background-color: var(--dark-color);
+
+        .receipt-section strong {
+            font-size: 9pt;
+            margin-left: 10px;
         }
-        
-        .error-message {
-            color: var(--danger-color);
-            font-size: 0.9rem;
-            margin-top: 0.3rem;
-        }
-        
-        .success-message {
-            background-color: #dff0d8;
-            color: #3c763d;
-            padding: 10px;
+
+        .receipt-prices {
+            font-size: 10pt;
             margin: 10px 0;
-            border-radius: var(--border-radius);
+            text-align: right;
+        }
+
+        .receipt-prices-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            direction: rtl;
+        }
+
+        .receipt-total {
+            border-top: 1px solid #000;
+            padding-top: 5px;
+            margin-top: 5px;
+            font-weight: bold;
+            font-size: 11pt;
+        }
+
+        .receipt-notes {
+            border-top: 1px dashed #000;
+            padding-top: 8px;
+            margin-top: 8px;
+            font-size: 8pt;
+            text-align: right;
+        }
+
+        .receipt-qr {
             text-align: center;
-            display: none;
+            margin: 10px 0;
+            padding: 10px 0;
+            border-top: 1px dashed #000;
+            border-bottom: 1px dashed #000;
+        }
+
+        .receipt-qr img {
+            width: 30mm;
+            height: 30mm;
+            object-fit: contain;
+        }
+
+        .receipt-qr p {
+            font-size: 8pt;
+            margin-top: 5px;
+            direction: ltr;
+        }
+
+        .receipt-footer {
+            text-align: center;
+            border-top: 2px dashed #000;
+            padding-top: 10px;
+            margin-top: 10px;
+            font-size: 9pt;
+        }
+
+        .receipt-footer p {
+            margin: 3px 0;
+        }
+
+        /* iOS Safari Fix */
+        input, select, textarea {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        /* Prevent zoom on input focus for iOS */
+        @media screen and (max-width: 768px) {
+            select, textarea, input[type="text"], input[type="tel"], input[type="number"] {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>سیستەمی بەڕێوەبردنی ئەندامان</h1>
-        </header>
-        
-        <button class="toggle-form">
-            <i class="fas fa-plus"></i> زیادکردنی ئەندامی نوێ
-        </button>
-        
-        <div class="form-container">
-            <h2>فۆڕمی زیادکردنی ئەندام</h2>
-            <form id="memberForm">
-                <input type="hidden" id="memberId" value="">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="member_id">ژمارەی ئەندام</label>
-                        <input type="text" id="member_id" name="member_id" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">ناو</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="education_level">ئاستی خوێندن</label>
-                        <select id="education_level" name="education_level">
-                            <option value="سەرەتایی">سەرەتایی</option>
-                            <option value="ناوەندی">ناوەندی</option>
-                            <option value="ئامادەیی">ئامادەیی</option>
-                            <option value="دبلۆم">دبلۆم</option>
-                            <option value="بەکالۆریۆس">بەکالۆریۆس</option>
-                            <option value="ماستەر">ماستەر</option>
-                            <option value="دکتۆرا">دکتۆرا</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">ناونیشان</label>
-                        <input type="text" id="address" name="address">
-                    </div>
-                    <div class="form-group">
-                        <label for="date_of_birth">بەرواری لەدایکبوون</label>
-                        <input type="date" id="date_of_birth" name="date_of_birth">
-                    </div>
-                    <div class="form-group">
-                        <label for="family">خێزان</label>
-                        <input type="text" id="family" name="family">
-                    </div>
-                    <div class="form-group">
-                        <label for="language">زمان</label>
-                        <input type="text" id="language" name="language">
-                    </div>
-                    <div class="form-group">
-                        <label for="membership_date">بەرواری ئەندامێتی</label>
-                        <input type="date" id="membership_date" name="membership_date">
-                    </div>
-                    <div class="form-group">
-                        <label for="occupation">پیشە</label>
-                        <input type="text" id="occupation" name="occupation">
-                    </div>
-                    <div class="form-group">
-                        <label for="blood_type">گروپی خوێن</label>
-                        <select id="blood_type" name="blood_type">
-                            <option value="A+">A+</option>
-                            <option value="A-">A-</option>
-                            <option value="B+">B+</option>
-                            <option value="B-">B-</option>
-                            <option value="AB+">AB+</option>
-                            <option value="AB-">AB-</option>
-                            <option value="O+">O+</option>
-                            <option value="O-">O-</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone_number">ژمارەی مۆبایل</label>
-                        <input type="tel" id="phone_number" name="phone_number">
-                    </div>
-                    <div class="form-group">
-                        <label for="photo">وێنە</label>
-                        <input type="file" id="photo" name="photo">
-                    </div>
-                    <div class="form-group">
-                        <label for="person_id_card">ژمارەی ناسنامە</label>
-                        <input type="text" id="person_id_card" name="person_id_card">
-                    </div>
-                    <div class="form-group">
-                        <label for="health_id_card">ژمارەی کارتی تەندروستی</label>
-                        <input type="text" id="health_id_card" name="health_id_card">
-                    </div>
-                </div>
-                
-                <div class="form-actions" style="margin-top: 1rem;">
-                    <button type="submit" id="saveBtn">
-                        <i class="fas fa-save"></i> پاشەکەوتکردن
-                    </button>
-                    <button type="button" id="resetBtn" class="btn-warning" style="margin-right: 10px;">
-                        <i class="fas fa-redo"></i> پاککردنەوە
-                    </button>
-                </div>
-            </form>
-            <div class="success-message" id="successMessage"></div>
+    <div class="app-container">
+        <!-- Header with Logo -->
+        <div class="app-header">
+            <div class="logo-container">
+                <img src="https://i.ibb.co/TDmLy51F/Whats-App-Image-2025-10-09-at-3-10-24-PM.jpg" alt="Siya Shops Logo">
+            </div>
+            <h1>Siya Shop</h1>
+            <p>سیستەمی چاپی پسوڵە</p>
         </div>
-        
-        <div class="table-container">
-            <div class="search-container">
-                <input type="text" id="searchInput" class="search-input" placeholder="گەڕان...">
-                <button class="search-btn">
-                    <i class="fas fa-search"></i> گەڕان
+        <!-- Form -->
+        <div class="form-container">
+            <div class="form-card">
+                <div class="form-group">
+                    <label>📱 ژمارەی مۆبایل</label>
+                    <input type="tel" id="mobileNumber" placeholder="07501234567" dir="ltr" autocomplete="tel">
+                </div>
+
+                <div class="form-group">
+                    <label>👤 ناوی کڕیار</label>
+                    <input type="text" id="customerName" placeholder="ناوی کڕیار" autocomplete="name">
+                </div>
+
+                <div class="form-group">
+                    <label>📍 پارێزگا</label>
+                    <select id="province">
+                        <option value="">پارێزگا هەڵبژێرە</option>
+                        <option value="هەولێر">هەولێر - Erbil</option>
+                        <option value="سلێمانی">سلێمانی - Sulaymaniyah</option>
+                        <option value="دهۆک">دهۆک - Duhok</option>
+                        <option value="کەرکوک">کەرکوک - Kirkuk</option>
+                        <option value="بەغدا">بەغدا - Baghdad</option>
+                        <option value="بەسرە">بەسرە - Basra</option>
+                        <option value="موسڵ">موسڵ - Mosul</option>
+                        <option value="ئەنبار">ئەنبار - Anbar</option>
+                        <option value="نەینەوا">نەینەوا - Nineveh</option>
+                        <option value="هەڵەبجە">هەڵەبجە - Halabja</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>🏠 ناونیشان</label>
+                    <input type="text" id="address" placeholder="ناونیشانی وردەکاری" autocomplete="street-address">
+                </div>
+
+                <div class="form-group">
+                    <label>💰 نرخی کاڵا (IQD)</label>
+                    <input type="number" id="priceGoods" placeholder="0" dir="ltr" oninput="calculateTotal()">
+                </div>
+
+                <div class="form-group">
+                    <label>📦 نرخی پۆست (IQD)</label>
+                    <input type="number" id="priceShipping" placeholder="0" dir="ltr" oninput="calculateTotal()">
+                </div>
+
+                <div class="form-group">
+                    <label>📝 تێبینی</label>
+                    <textarea id="notes" rows="3" placeholder="تێبینیەکان..."></textarea>
+                </div>
+
+                <!-- Total Display -->
+                <div class="total-card">
+                    <div class="total-label">کۆی گشتی</div>
+                    <div class="total-amount" id="totalAmount">0 IQD</div>
+                </div>
+
+                <!-- Print Button -->
+                <button class="btn-print" onclick="printReceipt()">
+                    <span>🖨️</span>
+                    <span>چاپکردنی پسوڵە</span>
                 </button>
             </div>
-            
-            <table id="membersTable">
-                <thead>
-                    <tr>
-                        <th>ژمارەی ئەندام</th>
-                        <th>ناو</th>
-                        <th>ئاستی خوێندن</th>
-                        <th>ناونیشان</th>
-                        <th>بەرواری لەدایکبوون</th>
-                        <th>خێزان</th>
-                        <th>زمان</th>
-                        <th>بەرواری ئەندامێتی</th>
-                        <th>پیشە</th>
-                        <th>گروپی خوێن</th>
-                        <th>ژمارەی مۆبایل</th>
-                        <th>ژمارەی ناسنامە</th>
-                        <th>ژمارەی کارتی تەندروستی</th>
-                        <th>کردارەکان</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    <!-- Data will be loaded here -->
-                </tbody>
-            </table>
-            
-            <div class="pagination" id="pagination">
-                <!-- Pagination will be generated here -->
+        </div>
+
+        <!-- Receipt Preview -->
+        <div class="receipt" id="receipt">
+            <!-- Logo -->
+           
+
+            <!-- Receipt Header -->
+            <div class="receipt-header">
+                <div class="receipt-header-text">
+                    <h2>Siya Shop</h2>
+                    <p> سییاشۆپ</p>
+                    <p>07702149727</p>
+                    <p>سلێمانی: ئاشتی: فەرعی کۆڵانە</p>
+                    <p>پانەکەی هۆڵی ئەجێ خانم</p>
+                </div>
+                <div class="receipt-logo">
+                    <img src="https://i.ibb.co/TDmLy51F/Whats-App-Image-2025-10-09-at-3-10-24-PM.jpg" alt="Siya Shops Logo">
+                </div>
+            </div>
+
+            <!-- Receipt Info -->
+            <div class="receipt-info">
+                <div class="receipt-info-row">
+                    <span id="receiptDate" dir="ltr"></span>
+                    <span>بەروار:</span>
+                </div>
+                <div class="receipt-info-row">
+                    <span id="receiptNumber" dir="ltr"></span>
+                    <span>ژمارە:</span>
+                </div>
+            </div>
+
+            <!-- Customer Info -->
+            <div class="receipt-section">
+                <div>
+                    <span id="receiptMobile" dir="ltr">---</span>
+                    <strong>:مۆبایل</strong>
+                </div>
+                <div id="receiptNameRow" style="display: none;">
+                    <span id="receiptName"></span>
+                    <strong>:ناو</strong>
+                </div>
+                <div>
+                    <span id="receiptProvince">---</span>
+                    <strong>:پارێزگا</strong>
+                </div>
+                <div id="receiptAddressRow" style="display: none;">
+                    <span id="receiptAddress"></span>
+                    <strong>:ناونیشان</strong>
+                </div>
+            </div>
+
+            <!-- Price Details -->
+            <div class="receipt-prices">
+                <div class="receipt-prices-row">
+                    <span id="receiptGoods" dir="ltr">0 IQD</span>
+                    <span>نرخی کاڵا:</span>
+                </div>
+                <div class="receipt-prices-row">
+                    <span id="receiptShipping" dir="ltr">0 IQD</span>
+                    <span>نرخی پۆست:</span>
+                </div>
+                <div class="receipt-prices-row receipt-total">
+                    <span id="receiptTotal" dir="ltr">0 IQD</span>
+                    <span>کۆی گشتی:</span>
+                </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="receipt-notes" id="receiptNotesSection" style="display: none;">
+                <strong>تێبینی:</strong>
+                <p id="receiptNotes"></p>
+            </div>
+
+            <!-- QR Code for Instagram -->
+            <div class="receipt-qr">
+                <img src="https://i.ibb.co/zHSLjxTq/Whats-App-Image-2025-10-09-at-3-11-43-PM.jpg" alt="Instagram QR Code">
+                <p>@SIYA_SHOPS</p>
+                <p>سەردانی پەیجەکەمان بکە</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="receipt-footer">
+                <p><strong>سوپاس بۆ کڕینەکەت!</strong></p>
+                <p>!Thank you for your purchase</p>
+                <p>Since 2025</p>
             </div>
         </div>
     </div>
 
     <script>
-        // Sample data to simulate database
-        let members = [];
-        const ITEMS_PER_PAGE = 10;
-        let currentPage = 1;
-        
-        // DOM Elements
-        const toggleFormBtn = document.querySelector('.toggle-form');
-        const formContainer = document.querySelector('.form-container');
-        const memberForm = document.getElementById('memberForm');
-        const resetBtn = document.getElementById('resetBtn');
-        const tableBody = document.getElementById('tableBody');
-        const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.querySelector('.search-btn');
-        const paginationContainer = document.getElementById('pagination');
-        const successMessage = document.getElementById('successMessage');
-        
-        // Toggle form visibility
-        toggleFormBtn.addEventListener('click', () => {
-            formContainer.classList.toggle('active');
-            if (formContainer.classList.contains('active')) {
-                toggleFormBtn.innerHTML = '<i class="fas fa-minus"></i> شاردنەوەی فۆڕم';
+        function calculateTotal() {
+            const goods = parseFloat(document.getElementById('priceGoods').value) || 0;
+            const shipping = parseFloat(document.getElementById('priceShipping').value) || 0;
+            const total = goods + shipping;
+            document.getElementById('totalAmount').textContent = total.toLocaleString() + ' IQD';
+        }
+
+        function getCurrentDateTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            return `${year}/${month}/${day} ${hours}:${minutes}`;
+        }
+
+        function generateReceiptNumber() {
+            return '#' + Math.floor(Math.random() * 100000).toString().padStart(5, '0');
+        }
+
+        function updateReceipt() {
+            const mobile = document.getElementById('mobileNumber').value;
+            const name = document.getElementById('customerName').value;
+            const province = document.getElementById('province').value;
+            const address = document.getElementById('address').value;
+            const goods = parseFloat(document.getElementById('priceGoods').value) || 0;
+            const shipping = parseFloat(document.getElementById('priceShipping').value) || 0;
+            const notes = document.getElementById('notes').value;
+            const total = goods + shipping;
+
+            document.getElementById('receiptDate').textContent = getCurrentDateTime();
+            document.getElementById('receiptNumber').textContent = generateReceiptNumber();
+            document.getElementById('receiptMobile').textContent = mobile || '---';
+            document.getElementById('receiptProvince').textContent = province || '---';
+            
+            if (name) {
+                document.getElementById('receiptName').textContent = name;
+                document.getElementById('receiptNameRow').style.display = 'flex';
             } else {
-                toggleFormBtn.innerHTML = '<i class="fas fa-plus"></i> زیادکردنی ئەندامی نوێ';
+                document.getElementById('receiptNameRow').style.display = 'none';
             }
-        });
-        
-        // Reset form
-        resetBtn.addEventListener('click', () => {
-            memberForm.reset();
-            document.getElementById('memberId').value = '';
-            document.getElementById('saveBtn').innerHTML = '<i class="fas fa-save"></i> پاشەکەوتکردن';
-        });
-        
-        // Handle form submission
-        memberForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const memberData = {};
-            
-            for (const [key, value] of formData.entries()) {
-                if (key !== 'photo') {
-                    memberData[key] = value;
-                }
-            }
-            
-            const memberId = document.getElementById('memberId').value;
-            
-            if (memberId) {
-                // Update existing member
-                const index = members.findIndex(m => m.id === memberId);
-                if (index !== -1) {
-                    members[index] = { ...members[index], ...memberData, id: memberId };
-                    showSuccessMessage('ئەندام بە سەرکەوتوویی نوێکرایەوە');
-                }
+
+            if (address) {
+                document.getElementById('receiptAddress').textContent = address;
+                document.getElementById('receiptAddressRow').style.display = 'flex';
             } else {
-                // Add new member
-                const newId = Date.now().toString();
-                members.push({ ...memberData, id: newId });
-                showSuccessMessage('ئەندام بە سەرکەوتوویی زیادکرا');
+                document.getElementById('receiptAddressRow').style.display = 'none';
             }
-            
-            // Reset form and refresh table
-            resetBtn.click();
-            renderTable();
-        });
-        
-        // Show success message
-        function showSuccessMessage(message) {
-            successMessage.textContent = message;
-            successMessage.style.display = 'block';
-            
-            setTimeout(() => {
-                successMessage.style.display = 'none';
-            }, 3000);
-        }
-        
-        // Generate table rows
-        function renderTable(filteredData = null) {
-            const data = filteredData || members;
-            tableBody.innerHTML = '';
-            
-            // Calculate pagination
-            const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
-            const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-            const paginatedData = data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-            
-            if (paginatedData.length === 0) {
-                const emptyRow = document.createElement('tr');
-                emptyRow.innerHTML = `<td colspan="14" style="text-align: center;">هیچ داتایەک نییە</td>`;
-                tableBody.appendChild(emptyRow);
+
+            if (notes) {
+                document.getElementById('receiptNotes').textContent = notes;
+                document.getElementById('receiptNotesSection').style.display = 'block';
             } else {
-                paginatedData.forEach(member => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${member.member_id || ''}</td>
-                        <td>${member.name || ''}</td>
-                        <td>${member.education_level || ''}</td>
-                        <td>${member.address || ''}</td>
-                        <td>${member.date_of_birth || ''}</td>
-                        <td>${member.family || ''}</td>
-                        <td>${member.language || ''}</td>
-                        <td>${member.membership_date || ''}</td>
-                        <td>${member.occupation || ''}</td>
-                        <td>${member.blood_type || ''}</td>
-                        <td>${member.phone_number || ''}</td>
-                        <td>${member.person_id_card || ''}</td>
-                        <td>${member.health_id_card || ''}</td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="action-btn edit-btn" data-id="${member.id}">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="action-btn delete-btn" data-id="${member.id}">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    `;
-                    tableBody.appendChild(row);
-                });
+                document.getElementById('receiptNotesSection').style.display = 'none';
+            }
+
+            document.getElementById('receiptGoods').textContent = goods.toLocaleString() + ' IQD';
+            document.getElementById('receiptShipping').textContent = shipping.toLocaleString() + ' IQD';
+            document.getElementById('receiptTotal').textContent = total.toLocaleString() + ' IQD';
+        }
+
+        function printReceipt() {
+            updateReceipt();
+            
+            // Vibrate on mobile if supported
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
             }
             
-            // Update pagination controls
-            renderPagination(totalPages);
-            
-            // Add event listeners to action buttons
-            addActionListeners();
+            window.print();
         }
-        
-        // Generate pagination controls
-        function renderPagination(totalPages) {
-            paginationContainer.innerHTML = '';
-            
-            if (totalPages <= 1) return;
-            
-            // Previous button
-            const prevBtn = document.createElement('button');
-            prevBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
-            prevBtn.disabled = currentPage === 1;
-            prevBtn.addEventListener('click', () => {
-                if (currentPage > 1) {
-                    currentPage--;
-                    renderTable();
-                }
-            });
-            paginationContainer.appendChild(prevBtn);
-            
-            // Page buttons
-            for (let i = 1; i <= totalPages; i++) {
-                const pageBtn = document.createElement('button');
-                pageBtn.textContent = i;
-                pageBtn.classList.toggle('active', i === currentPage);
-                pageBtn.addEventListener('click', () => {
-                    currentPage = i;
-                    renderTable();
-                });
-                paginationContainer.appendChild(pageBtn);
+
+        // Prevent zoom on double tap for iOS
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
             }
-            
-            // Next button
-            const nextBtn = document.createElement('button');
-            nextBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
-            nextBtn.disabled = currentPage === totalPages;
-            nextBtn.addEventListener('click', () => {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    renderTable();
-                }
-            });
-            paginationContainer.appendChild(nextBtn);
-        }
-        
-        // Add event listeners to action buttons
-        function addActionListeners() {
-            // Edit buttons
-            document.querySelectorAll('.edit-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const memberId = this.getAttribute('data-id');
-                    editMember(memberId);
-                });
-            });
-            
-            // Delete buttons
-            document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const memberId = this.getAttribute('data-id');
-                    deleteMember(memberId);
-                });
-            });
-        }
-        
-        // Edit member
-        function editMember(id) {
-            const member = members.find(m => m.id === id);
-            if (!member) return;
-            
-            // Populate form with member data
-            document.getElementById('memberId').value = member.id;
-            document.getElementById('member_id').value = member.member_id || '';
-            document.getElementById('name').value = member.name || '';
-            document.getElementById('education_level').value = member.education_level || '';
-            document.getElementById('address').value = member.address || '';
-            document.getElementById('date_of_birth').value = member.date_of_birth || '';
-            document.getElementById('family').value = member.family || '';
-            document.getElementById('language').value = member.language || '';
-            document.getElementById('membership_date').value = member.membership_date || '';
-            document.getElementById('occupation').value = member.occupation || '';
-            document.getElementById('blood_type').value = member.blood_type || '';
-            document.getElementById('phone_number').value = member.phone_number || '';
-            document.getElementById('person_id_card').value = member.person_id_card || '';
-            document.getElementById('health_id_card').value = member.health_id_card || '';
-            
-            // Change button text
-            document.getElementById('saveBtn').innerHTML = '<i class="fas fa-edit"></i> نوێکردنەوە';
-            
-            // Show form if it's hidden
-            formContainer.classList.add('active');
-            toggleFormBtn.innerHTML = '<i class="fas fa-minus"></i> شاردنەوەی فۆڕم';
-            
-            // Scroll to form
-            formContainer.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // Delete member
-        function deleteMember(id) {
-            if (confirm('دڵنیایت لە سڕینەوەی ئەم ئەندامە؟')) {
-                members = members.filter(m => m.id !== id);
-                showSuccessMessage('ئەندام بە سەرکەوتوویی سڕایەوە');
-                renderTable();
-            }
-        }
-        
-        // Search functionality
-        searchBtn.addEventListener('click', performSearch);
-        searchInput.addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') {
-                performSearch();
-            }
-        });
-        
-        function performSearch() {
-            const searchTerm = searchInput.value.trim().toLowerCase();
-            
-            if (searchTerm === '') {
-                renderTable();
-                return;
-            }
-            
-            const filteredData = members.filter(member => {
-                return Object.values(member).some(value => 
-                    value && value.toString().toLowerCase().includes(searchTerm)
-                );
-            });
-            
-            currentPage = 1;
-            renderTable(filteredData);
-        }
-        
-        // Load sample data
-        function loadSampleData() {
-            members = [
-                {
-                    id: '1',
-                    member_id: '1001',
-                    name: 'ئازاد محمد',
-                    education_level: 'بەکالۆریۆس',
-                    address: 'سلێمانی',
-                    date_of_birth: '1985-05-15',
-                    family: '3',
-                    language: 'کوردی، عەرەبی، ئینگلیزی',
-                    membership_date: '2020-01-10',
-                    occupation: 'مامۆستا',
-                    blood_type: 'O+',
-                    phone_number: '07501234567',
-                    person_id_card: '123456789',
-                    health_id_card: 'H12345'
-                },
-                {
-                    id: '2',
-                    member_id: '1002',
-                    name: 'ساکار ئەحمەد',
-                    education_level: 'ماستەر',
-                    address: 'هەولێر',
-                    date_of_birth: '1990-03-20',
-                    family: '2',
-                    language: 'کوردی، ئینگلیزی',
-                    membership_date: '2019-11-15',
-                    occupation: 'دکتۆر',
-                    blood_type: 'A+',
-                    phone_number: '07709876543',
-                    person_id_card: '987654321',
-                    health_id_card: 'H54321'
-                }
-            ];
-            
-            renderTable();
-        }
-        
-        // Initialize the app
-        document.addEventListener('DOMContentLoaded', () => {
-            loadSampleData();
-        });
+            lastTouchEnd = now;
+        }, false);
+
+        // Initialize
+        calculateTotal();
     </script>
 </body>
 </html>
