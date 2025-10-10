@@ -1,12 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Siya Shops ashty - چاپی پسوڵە</title>
+    <title>Siya Shop - چاپی پسوڵە</title>
     <style>
         * {
             margin: 0;
@@ -15,475 +15,500 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+```
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    .app-container {
+        max-width: 100vw;
+        min-height: 100vh;
+        padding-bottom: 20px;
+    }
+
+    .app-header {
+        background: white;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .logo-container {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 15px;
+        background: white;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .logo-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .app-header h1 {
+        color: #667eea;
+        font-size: 1.8em;
+        margin-bottom: 5px;
+    }
+
+    .app-header p {
+        color: #666;
+        font-size: 1em;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+
+    .form-card {
+        background: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 8px;
+        font-size: 1em;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        font-size: 16px;
+        transition: all 0.3s;
+        background: #f8f9fa;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #667eea;
+        background: white;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    }
+
+    .total-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    .total-label {
+        font-size: 1.1em;
+        opacity: 0.9;
+        margin-bottom: 8px;
+    }
+
+    .total-amount {
+        font-size: 2.2em;
+        font-weight: bold;
+    }
+
+    .btn-print {
+        width: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 18px;
+        font-size: 1.2em;
+        border-radius: 15px;
+        font-weight: bold;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.3s;
+    }
+
+    .btn-print:active {
+        transform: scale(0.98);
+    }
+
+    /* Receipt - MAXIMUM SIZE & CLARITY */
+    .receipt {
+        display: none;
+    }
+
+    @media print {
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .app-container {
-            max-width: 100vw;
-            min-height: 100vh;
-            padding-bottom: 20px;
-        }
-
-        /* Header with Logo */
-        .app-header {
             background: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 0;
+            margin: 0;
         }
 
-        .logo-container {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 15px;
-            background: white;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .logo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .app-header h1 {
-            color: #667eea;
-            font-size: 1.8em;
-            margin-bottom: 5px;
-        }
-
-        .app-header p {
-            color: #666;
-            font-size: 1em;
-        }
-
-        /* Form Container */
+        .app-header,
         .form-container {
-            padding: 20px;
+            display: none !important;
         }
 
-        .form-card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        .receipt {
+            display: block !important;
+            width: 80mm !important;
+            max-width: 80mm !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-family: Arial, sans-serif !important;
+            background: white !important;
+            page-break-after: avoid !important;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        @page {
+            size: 80mm auto;
+            margin: 0mm;
         }
+    }
 
-        .form-group label {
-            display: block;
-            color: #333;
-            font-weight: bold;
-            margin-bottom: 8px;
-            font-size: 1em;
-        }
+    .receipt {
+        width: 80mm;
+        max-width: 80mm;
+        margin: 20px auto;
+        padding: 0;
+        background: white;
+        font-family: Arial, sans-serif;
+        border: 2px solid #ccc;
+    }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
+    /* Inner content with padding */
+    .receipt-content {
+        padding: 6mm 4mm;
+        direction: rtl;
+        text-align: right;
+    }
+
+    .receipt-logo {
+        text-align: center;
+        margin-bottom: 6mm;
+        padding-bottom: 4mm;
+    }
+
+    .receipt-logo img {
+        width: 45mm;
+        height: 45mm;
+        object-fit: contain;
+    }
+
+    .receipt-header {
+        text-align: center;
+        border-bottom: 3px dashed #000;
+        padding-bottom: 5mm;
+        margin-bottom: 5mm;
+        line-height: 1.8;
+    }
+
+    .receipt-header h2 {
+        font-size: 24pt;
+        font-weight: 900;
+        margin-bottom: 3mm;
+        letter-spacing: 2px;
+        color: #000;
+    }
+
+    .receipt-header p {
+        font-size: 14pt;
+        margin: 2mm 0;
+        font-weight: 700;
+        color: #000;
+    }
+
+    .receipt-info {
+        margin-bottom: 5mm;
+        line-height: 2;
+    }
+
+    .receipt-info-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 3mm 0;
+        font-size: 13pt;
+        font-weight: 700;
+        color: #000;
+    }
+
+    .receipt-section {
+        border-top: 3px dashed #000;
+        border-bottom: 3px dashed #000;
+        padding: 5mm 0;
+        margin: 5mm 0;
+        line-height: 2;
+    }
+
+    .receipt-section div {
+        display: flex;
+        justify-content: space-between;
+        margin: 3mm 0;
+        font-size: 14pt;
+        font-weight: 700;
+        color: #000;
+    }
+
+    .receipt-section strong {
+        font-size: 14pt;
+        font-weight: 900;
+        color: #000;
+    }
+
+    .receipt-section span {
+        font-size: 14pt;
+        font-weight: 700;
+        color: #000;
+    }
+
+    .receipt-prices {
+        margin: 6mm 0;
+        line-height: 2;
+    }
+
+    .receipt-prices-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 3mm 0;
+        font-size: 15pt;
+        font-weight: 700;
+        color: #000;
+    }
+
+    .receipt-total {
+        border-top: 4px solid #000;
+        padding-top: 4mm;
+        margin-top: 4mm;
+        font-weight: 900;
+        font-size: 18pt;
+    }
+
+    .receipt-notes {
+        border-top: 3px dashed #000;
+        padding-top: 4mm;
+        margin-top: 4mm;
+        font-size: 12pt;
+        line-height: 1.8;
+        font-weight: 600;
+        color: #000;
+    }
+
+    .receipt-notes strong {
+        font-size: 13pt;
+        display: block;
+        margin-bottom: 2mm;
+        font-weight: 900;
+    }
+
+    .receipt-qr {
+        text-align: center;
+        margin: 5mm 0;
+        padding: 5mm 0;
+        border-top: 3px dashed #000;
+        border-bottom: 3px dashed #000;
+    }
+
+    .receipt-qr img {
+        width: 40mm;
+        height: 40mm;
+        object-fit: contain;
+        margin-bottom: 2mm;
+    }
+
+    .receipt-qr p {
+        font-size: 13pt;
+        margin: 2mm 0;
+        font-weight: 900;
+        color: #000;
+    }
+
+    .receipt-footer {
+        text-align: center;
+        border-top: 4px dashed #000;
+        padding-top: 5mm;
+        margin-top: 5mm;
+        line-height: 1.8;
+    }
+
+    .receipt-footer p {
+        margin: 2mm 0;
+        font-weight: 900;
+        font-size: 13pt;
+        color: #000;
+    }
+
+    input, select, textarea {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    @media screen and (max-width: 768px) {
+        select, textarea, input[type="text"], input[type="tel"], input[type="number"] {
             font-size: 16px;
-            transition: all 0.3s;
-            background: #f8f9fa;
         }
+    }
+</style>
+```
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-        }
-
-        /* Total Display */
-        .total-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .total-label {
-            font-size: 1.1em;
-            opacity: 0.9;
-            margin-bottom: 8px;
-        }
-
-        .total-amount {
-            font-size: 2.2em;
-            font-weight: bold;
-        }
-
-        /* Print Button */
-        .btn-print {
-            width: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 18px;
-            font-size: 1.2em;
-            border-radius: 15px;
-            font-weight: bold;
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s;
-        }
-
-        .btn-print:active {
-            transform: scale(0.98);
-        }
-
-        /* Receipt Styles */
-        .receipt {
-            display: none;
-        }
-
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-                margin: 0;
-            }
-
-            .app-header,
-            .form-container {
-                display: none !important;
-            }
-
-            .receipt {
-                display: block !important;
-                width: 80mm;
-                margin: 0;
-                padding: 5mm;
-                font-family: 'Courier New', monospace;
-                font-size: 10pt;
-                direction: rtl;
-                text-align: right;
-            }
-
-            @page {
-                size: 80mm auto;
-                margin: 0;
-            }
-        }
-
-        .receipt {
-            width: 80mm;
-            margin: 0 auto;
-            padding: 10px;
-            background: white;
-            font-family: 'Courier New', monospace;
-            direction: rtl;
-            text-align: right;
-        }
-
-        .receipt-logo {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .receipt-logo img {
-            width: 35mm;
-            height: 35mm;
-            object-fit: contain;
-        }
-
-        .receipt-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 2px dashed #000;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-            direction: rtl;
-        }
-
-        .receipt-header-text {
-            flex: 1;
-            text-align: right;
-            padding-left: 5mm;
-        }
-
-        .receipt-header h2 {
-            font-size: 18pt;
-            margin-bottom: 5px;
-            direction: ltr;
-            text-align: right;
-        }
-
-        .receipt-header p {
-            font-size: 9pt;
-            margin: 2px 0;
-        }
-
-        .receipt-info {
-            font-size: 9pt;
-            margin-bottom: 10px;
-            text-align: right;
-        }
-
-        .receipt-info-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 3px 0;
-            direction: rtl;
-        }
-
-        .receipt-section {
-            border-top: 1px dashed #000;
-            border-bottom: 1px dashed #000;
-            padding: 8px 0;
-            margin: 8px 0;
-            font-size: 9pt;
-            text-align: right;
-        }
-
-        .receipt-section div {
-            margin: 4px 0;
-            font-size: 9pt;
-            display: flex;
-            justify-content: space-between;
-            direction: rtl;
-        }
-
-        .receipt-section strong {
-            font-size: 9pt;
-            margin-left: 10px;
-        }
-
-        .receipt-prices {
-            font-size: 10pt;
-            margin: 10px 0;
-            text-align: right;
-        }
-
-        .receipt-prices-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 5px 0;
-            direction: rtl;
-        }
-
-        .receipt-total {
-            border-top: 1px solid #000;
-            padding-top: 5px;
-            margin-top: 5px;
-            font-weight: bold;
-            font-size: 11pt;
-        }
-
-        .receipt-notes {
-            border-top: 1px dashed #000;
-            padding-top: 8px;
-            margin-top: 8px;
-            font-size: 8pt;
-            text-align: right;
-        }
-
-        .receipt-qr {
-            text-align: center;
-            margin: 10px 0;
-            padding: 10px 0;
-            border-top: 1px dashed #000;
-            border-bottom: 1px dashed #000;
-        }
-
-        .receipt-qr img {
-            width: 30mm;
-            height: 30mm;
-            object-fit: contain;
-        }
-
-        .receipt-qr p {
-            font-size: 8pt;
-            margin-top: 5px;
-            direction: ltr;
-        }
-
-        .receipt-footer {
-            text-align: center;
-            border-top: 2px dashed #000;
-            padding-top: 10px;
-            margin-top: 10px;
-            font-size: 9pt;
-        }
-
-        .receipt-footer p {
-            margin: 3px 0;
-        }
-
-        /* iOS Safari Fix */
-        input, select, textarea {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
-        /* Prevent zoom on input focus for iOS */
-        @media screen and (max-width: 768px) {
-            select, textarea, input[type="text"], input[type="tel"], input[type="number"] {
-                font-size: 16px;
-            }
-        }
-    </style>
 </head>
 <body>
     <div class="app-container">
-        <!-- Header with Logo -->
         <div class="app-header">
             <div class="logo-container">
-                <img src="https://i.ibb.co/4wV9LTf7/Whats-App-Image-2025-10-09-at-4-17-11-PM.jpg" alt="Siya Shops Logo">
+                <img src="https://i.ibb.co/Sn1FXhm/IMG-20250109-154942-985.jpg" alt="Siya Shops">
             </div>
-            <h1>Siya Shops shty </h1>
+            <h1>Siya Shop</h1>
             <p>سیستەمی چاپی پسوڵە</p>
         </div>
-        <!-- Form -->
-        <div class="form-container">
-            <div class="form-card">
-                <div class="form-group">
-                    <label>📱 ژمارەی مۆبایل</label>
-                    <input type="tel" id="mobileNumber" placeholder="07501234567" dir="ltr" autocomplete="tel">
-                </div>
 
-                <div class="form-group">
-                    <label>👤 ناوی کڕیار</label>
-                    <input type="text" id="customerName" placeholder="ناوی کڕیار" autocomplete="name">
-                </div>
-
-                <div class="form-group">
-                    <label>📍 پارێزگا</label>
-                    <select id="province">
-                        <option value="">پارێزگا هەڵبژێرە</option>
-                        <option value="هەولێر">هەولێر - Erbil</option>
-                        <option value="سلێمانی">سلێمانی - Sulaymaniyah</option>
-                        <option value="دهۆک">دهۆک - Duhok</option>
-                        <option value="کەرکوک">کەرکوک - Kirkuk</option>
-                        <option value="بەغدا">بەغدا - Baghdad</option>
-                        <option value="بەسرە">بەسرە - Basra</option>
-                        <option value="موسڵ">موسڵ - Mosul</option>
-                        <option value="ئەنبار">ئەنبار - Anbar</option>
-                        <option value="نەینەوا">نەینەوا - Nineveh</option>
-                        <option value="هەڵەبجە">هەڵەبجە - Halabja</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>🏠 ناونیشان</label>
-                    <input type="text" id="address" placeholder="ناونیشانی وردەکاری" autocomplete="street-address">
-                </div>
-
-                <div class="form-group">
-                    <label>💰 نرخی کاڵا (IQD)</label>
-                    <input type="number" id="priceGoods" placeholder="0" dir="ltr" oninput="calculateTotal()">
-                </div>
-
-                <div class="form-group">
-                    <label>📦 نرخی پۆست (IQD)</label>
-                    <input type="number" id="priceShipping" placeholder="0" dir="ltr" oninput="calculateTotal()">
-                </div>
-
-                <div class="form-group">
-                    <label>📝 تێبینی</label>
-                    <textarea id="notes" rows="3" placeholder="تێبینیەکان..."></textarea>
-                </div>
-
-                <!-- Total Display -->
-                <div class="total-card">
-                    <div class="total-label">کۆی گشتی</div>
-                    <div class="total-amount" id="totalAmount">0 IQD</div>
-                </div>
-
-                <!-- Print Button -->
-                <button class="btn-print" onclick="printReceipt()">
-                    <span>🖨️</span>
-                    <span>چاپکردنی پسوڵە</span>
-                </button>
+```
+    <div class="form-container">
+        <div class="form-card">
+            <div class="form-group">
+                <label>📱 ژمارەی مۆبایل</label>
+                <input type="tel" id="mobileNumber" placeholder="07501234567" dir="ltr">
             </div>
+
+            <div class="form-group">
+                <label>👤 ناوی کڕیار</label>
+                <input type="text" id="customerName" placeholder="ناوی کڕیار">
+            </div>
+
+            <div class="form-group">
+                <label>📍 پارێزگا</label>
+                <select id="province">
+                    <option value="">پارێزگا هەڵبژێرە</option>
+                    <option value="هەولێر">هەولێر</option>
+                    <option value="سلێمانی">سلێمانی</option>
+                    <option value="دهۆک">دهۆک</option>
+                    <option value="کەرکوک">کەرکوک</option>
+                    <option value="بەغدا">بەغدا</option>
+                    <option value="بەسرە">بەسرە</option>
+                    <option value="موسڵ">موسڵ</option>
+                    <option value="ئەنبار">ئەنبار</option>
+                    <option value="نەینەوا">نەینەوا</option>
+                    <option value="هەڵەبجە">هەڵەبجە</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>🏠 ناونیشان</label>
+                <input type="text" id="address" placeholder="ناونیشانی وردەکاری">
+            </div>
+
+            <div class="form-group">
+                <label>💰 نرخی کاڵا (IQD)</label>
+                <input type="number" id="priceGoods" placeholder="0" dir="ltr" oninput="calculateTotal()">
+            </div>
+
+            <div class="form-group">
+                <label>📦 نرخی پۆست (IQD)</label>
+                <input type="number" id="priceShipping" placeholder="0" dir="ltr" oninput="calculateTotal()">
+            </div>
+
+            <div class="form-group">
+                <label>📝 تێبینی</label>
+                <textarea id="notes" rows="3" placeholder="تێبینیەکان..."></textarea>
+            </div>
+
+            <div class="total-card">
+                <div class="total-label">کۆی گشتی</div>
+                <div class="total-amount" id="totalAmount">0 IQD</div>
+            </div>
+
+            <button class="btn-print" onclick="printReceipt()">
+                <span>🖨️</span>
+                <span>چاپکردنی پسوڵە</span>
+            </button>
         </div>
+    </div>
 
-        <!-- Receipt Preview -->
-        <div class="receipt" id="receipt">
+    <!-- RECEIPT - ULTRA LARGE & CLEAR -->
+    <div class="receipt" id="receipt">
+        <div class="receipt-content">
             <!-- Logo -->
-           
-
-            <!-- Receipt Header -->
-            <div class="receipt-header">
-                <div class="receipt-header-text">
-                    <h2>Siya Shops ashty </h2>
-                    <p> سییاشۆپ</p>
-                    <p>07702149727</p>
-                    <p>سلێمانی: ئاشتی: فەرعی کۆڵانە</p>
-                    <p>پانەکەی هۆڵی ئەجێ خانم</p>
-                </div>
-                <div class="receipt-logo">
-                    <img src="https://i.ibb.co/4wV9LTf7/Whats-App-Image-2025-10-09-at-4-17-11-PM.jpg" alt="Siya Shops Logo">
-                </div>
+            <div class="receipt-logo">
+                <img src="https://i.ibb.co/Sn1FXhm/IMG-20250109-154942-985.jpg" alt="Logo">
             </div>
 
-            <!-- Receipt Info -->
+            <!-- Header -->
+            <div class="receipt-header">
+                <h2>Siya Shop</h2>
+                <p>شۆپی سییا</p>
+                <p><strong>07702149727</strong></p>
+                <p>سلێمانی: ئاشتی</p>
+                <p>فەرعی کۆڵانە پانەکەی</p>
+                <p>هۆڵی ئەجێ خانم</p>
+            </div>
+
+            <!-- Info -->
             <div class="receipt-info">
                 <div class="receipt-info-row">
                     <span id="receiptDate" dir="ltr"></span>
-                    <span>بەروار:</span>
+                    <strong>بەروار:</strong>
                 </div>
                 <div class="receipt-info-row">
                     <span id="receiptNumber" dir="ltr"></span>
-                    <span>ژمارە:</span>
+                    <strong>ژمارە:</strong>
                 </div>
             </div>
 
-            <!-- Customer Info -->
+            <!-- Customer -->
             <div class="receipt-section">
                 <div>
                     <span id="receiptMobile" dir="ltr">---</span>
-                    <strong>:مۆبایل</strong>
+                    <strong>مۆبایل:</strong>
                 </div>
                 <div id="receiptNameRow" style="display: none;">
                     <span id="receiptName"></span>
-                    <strong>:ناو</strong>
+                    <strong>ناو:</strong>
                 </div>
                 <div>
                     <span id="receiptProvince">---</span>
-                    <strong>:پارێزگا</strong>
+                    <strong>پارێزگا:</strong>
                 </div>
                 <div id="receiptAddressRow" style="display: none;">
                     <span id="receiptAddress"></span>
-                    <strong>:ناونیشان</strong>
+                    <strong>ناونیشان:</strong>
                 </div>
             </div>
 
-            <!-- Price Details -->
+            <!-- Prices -->
             <div class="receipt-prices">
                 <div class="receipt-prices-row">
-                    <span id="receiptGoods" dir="ltr">0 IQD</span>
-                    <span>نرخی کاڵا:</span>
+                    <strong id="receiptGoods" dir="ltr">0 IQD</strong>
+                    <strong>نرخی کاڵا:</strong>
                 </div>
                 <div class="receipt-prices-row">
-                    <span id="receiptShipping" dir="ltr">0 IQD</span>
-                    <span>نرخی پۆست:</span>
+                    <strong id="receiptShipping" dir="ltr">0 IQD</strong>
+                    <strong>نرخی پۆست:</strong>
                 </div>
                 <div class="receipt-prices-row receipt-total">
-                    <span id="receiptTotal" dir="ltr">0 IQD</span>
-                    <span>کۆی گشتی:</span>
+                    <strong id="receiptTotal" dir="ltr">0 IQD</strong>
+                    <strong>کۆی گشتی:</strong>
                 </div>
             </div>
 
@@ -493,113 +518,106 @@
                 <p id="receiptNotes"></p>
             </div>
 
-            <!-- QR Code for Instagram -->
+            <!-- QR -->
             <div class="receipt-qr">
-                <img src="https://i.ibb.co/8LFYgr8m/Whats-App-Image-2025-10-09-at-4-44-32-PM.jpg" alt="Instagram QR Code">
-                <p>@SIYA_SHOPS</p>
+                <img src="https://i.ibb.co/zHSLjxTq/Whats-App-Image-2025-10-09-at-3-11-43-PM.jpg" alt="QR">
+                <p><strong>@SIYA_SHOPS</strong></p>
                 <p>سەردانی پەیجەکەمان بکە</p>
             </div>
 
             <!-- Footer -->
             <div class="receipt-footer">
                 <p><strong>سوپاس بۆ کڕینەکەت!</strong></p>
-                <p>!Thank you for your purchase</p>
-                <p>Since 2025</p>
+                <p><strong>Thank you!</strong></p>
+                <p><strong>Since 2019</strong></p>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        function calculateTotal() {
-            const goods = parseFloat(document.getElementById('priceGoods').value) || 0;
-            const shipping = parseFloat(document.getElementById('priceShipping').value) || 0;
-            const total = goods + shipping;
-            document.getElementById('totalAmount').textContent = total.toLocaleString() + ' IQD';
+<script>
+    function calculateTotal() {
+        const goods = parseFloat(document.getElementById('priceGoods').value) || 0;
+        const shipping = parseFloat(document.getElementById('priceShipping').value) || 0;
+        const total = goods + shipping;
+        document.getElementById('totalAmount').textContent = total.toLocaleString() + ' IQD';
+    }
+
+    function getCurrentDateTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        return `${year}/${month}/${day} ${hours}:${minutes}`;
+    }
+
+    function generateReceiptNumber() {
+        return '#' + Math.floor(Math.random() * 100000).toString().padStart(5, '0');
+    }
+
+    function updateReceipt() {
+        const mobile = document.getElementById('mobileNumber').value;
+        const name = document.getElementById('customerName').value;
+        const province = document.getElementById('province').value;
+        const address = document.getElementById('address').value;
+        const goods = parseFloat(document.getElementById('priceGoods').value) || 0;
+        const shipping = parseFloat(document.getElementById('priceShipping').value) || 0;
+        const notes = document.getElementById('notes').value;
+        const total = goods + shipping;
+
+        document.getElementById('receiptDate').textContent = getCurrentDateTime();
+        document.getElementById('receiptNumber').textContent = generateReceiptNumber();
+        document.getElementById('receiptMobile').textContent = mobile || '---';
+        document.getElementById('receiptProvince').textContent = province || '---';
+        
+        if (name) {
+            document.getElementById('receiptName').textContent = name;
+            document.getElementById('receiptNameRow').style.display = 'flex';
+        } else {
+            document.getElementById('receiptNameRow').style.display = 'none';
         }
 
-        function getCurrentDateTime() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            return `${year}/${month}/${day} ${hours}:${minutes}`;
+        if (address) {
+            document.getElementById('receiptAddress').textContent = address;
+            document.getElementById('receiptAddressRow').style.display = 'flex';
+        } else {
+            document.getElementById('receiptAddressRow').style.display = 'none';
         }
 
-        function generateReceiptNumber() {
-            return '#' + Math.floor(Math.random() * 100000).toString().padStart(5, '0');
+        if (notes) {
+            document.getElementById('receiptNotes').textContent = notes;
+            document.getElementById('receiptNotesSection').style.display = 'block';
+        } else {
+            document.getElementById('receiptNotesSection').style.display = 'none';
         }
 
-        function updateReceipt() {
-            const mobile = document.getElementById('mobileNumber').value;
-            const name = document.getElementById('customerName').value;
-            const province = document.getElementById('province').value;
-            const address = document.getElementById('address').value;
-            const goods = parseFloat(document.getElementById('priceGoods').value) || 0;
-            const shipping = parseFloat(document.getElementById('priceShipping').value) || 0;
-            const notes = document.getElementById('notes').value;
-            const total = goods + shipping;
+        document.getElementById('receiptGoods').textContent = goods.toLocaleString() + ' IQD';
+        document.getElementById('receiptShipping').textContent = shipping.toLocaleString() + ' IQD';
+        document.getElementById('receiptTotal').textContent = total.toLocaleString() + ' IQD';
+    }
 
-            document.getElementById('receiptDate').textContent = getCurrentDateTime();
-            document.getElementById('receiptNumber').textContent = generateReceiptNumber();
-            document.getElementById('receiptMobile').textContent = mobile || '---';
-            document.getElementById('receiptProvince').textContent = province || '---';
-            
-            if (name) {
-                document.getElementById('receiptName').textContent = name;
-                document.getElementById('receiptNameRow').style.display = 'flex';
-            } else {
-                document.getElementById('receiptNameRow').style.display = 'none';
-            }
-
-            if (address) {
-                document.getElementById('receiptAddress').textContent = address;
-                document.getElementById('receiptAddressRow').style.display = 'flex';
-            } else {
-                document.getElementById('receiptAddressRow').style.display = 'none';
-            }
-
-            if (notes) {
-                document.getElementById('receiptNotes').textContent = notes;
-                document.getElementById('receiptNotesSection').style.display = 'block';
-            } else {
-                document.getElementById('receiptNotesSection').style.display = 'none';
-            }
-
-            document.getElementById('receiptGoods').textContent = goods.toLocaleString() + ' IQD';
-            document.getElementById('receiptShipping').textContent = shipping.toLocaleString() + ' IQD';
-            document.getElementById('receiptTotal').textContent = total.toLocaleString() + ' IQD';
+    function printReceipt() {
+        updateReceipt();
+        if (navigator.vibrate) {
+            navigator.vibrate(50);
         }
+        window.print();
+    }
 
-        function printReceipt() {
-            updateReceipt();
-            
-            // Vibrate on mobile if supported
-            if (navigator.vibrate) {
-                navigator.vibrate(50);
-            }
-            
-            window.print();
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
         }
+        lastTouchEnd = now;
+    }, false);
 
-        // Prevent zoom on double tap for iOS
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function (event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
+    calculateTotal();
+</script>
+```
 
-        // Initialize
-        calculateTotal();
-    </script>
 </body>
 </html>
-
-
-
-
-
