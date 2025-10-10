@@ -149,7 +149,7 @@
         transform: scale(0.98);
     }
 
-    /* Receipt - MAXIMUM SIZE & CLARITY */
+    /* STICKER RECEIPT - 100mm × 140mm */
     .receipt {
         display: none;
     }
@@ -173,8 +173,9 @@
 
         .receipt {
             display: block !important;
-            width: 80mm !important;
-            max-width: 80mm !important;
+            width: 100mm !important;
+            height: auto !important;
+            max-width: 100mm !important;
             margin: 0 !important;
             padding: 0 !important;
             font-family: Arial, sans-serif !important;
@@ -183,14 +184,14 @@
         }
 
         @page {
-            size: 80mm auto;
+            size: 100mm 140mm;
             margin: 0mm;
         }
     }
 
     .receipt {
-        width: 80mm;
-        max-width: 80mm;
+        width: 100mm;
+        max-width: 100mm;
         margin: 20px auto;
         padding: 0;
         background: white;
@@ -198,164 +199,163 @@
         border: 2px solid #ccc;
     }
 
-    /* Inner content with padding */
     .receipt-content {
-        padding: 6mm 4mm;
+        padding: 5mm;
         direction: rtl;
         text-align: right;
     }
 
     .receipt-logo {
         text-align: center;
-        margin-bottom: 6mm;
-        padding-bottom: 4mm;
+        margin-bottom: 4mm;
+        padding-bottom: 3mm;
     }
 
     .receipt-logo img {
-        width: 45mm;
-        height: 45mm;
+        width: 35mm;
+        height: 35mm;
         object-fit: contain;
     }
 
     .receipt-header {
         text-align: center;
-        border-bottom: 3px dashed #000;
-        padding-bottom: 5mm;
-        margin-bottom: 5mm;
-        line-height: 1.8;
+        border-bottom: 2px dashed #000;
+        padding-bottom: 3mm;
+        margin-bottom: 3mm;
+        line-height: 1.5;
     }
 
     .receipt-header h2 {
-        font-size: 24pt;
+        font-size: 20pt;
         font-weight: 900;
-        margin-bottom: 3mm;
-        letter-spacing: 2px;
+        margin-bottom: 2mm;
+        letter-spacing: 1px;
         color: #000;
     }
 
     .receipt-header p {
-        font-size: 14pt;
-        margin: 2mm 0;
+        font-size: 11pt;
+        margin: 1mm 0;
         font-weight: 700;
         color: #000;
     }
 
     .receipt-info {
-        margin-bottom: 5mm;
-        line-height: 2;
+        margin-bottom: 3mm;
+        line-height: 1.6;
     }
 
     .receipt-info-row {
         display: flex;
         justify-content: space-between;
-        margin: 3mm 0;
-        font-size: 13pt;
+        margin: 2mm 0;
+        font-size: 10pt;
         font-weight: 700;
         color: #000;
     }
 
     .receipt-section {
-        border-top: 3px dashed #000;
-        border-bottom: 3px dashed #000;
-        padding: 5mm 0;
-        margin: 5mm 0;
-        line-height: 2;
+        border-top: 2px dashed #000;
+        border-bottom: 2px dashed #000;
+        padding: 3mm 0;
+        margin: 3mm 0;
+        line-height: 1.6;
     }
 
     .receipt-section div {
         display: flex;
         justify-content: space-between;
-        margin: 3mm 0;
-        font-size: 14pt;
+        margin: 2mm 0;
+        font-size: 11pt;
         font-weight: 700;
         color: #000;
     }
 
     .receipt-section strong {
-        font-size: 14pt;
+        font-size: 11pt;
         font-weight: 900;
         color: #000;
     }
 
     .receipt-section span {
-        font-size: 14pt;
+        font-size: 11pt;
         font-weight: 700;
         color: #000;
     }
 
     .receipt-prices {
-        margin: 6mm 0;
-        line-height: 2;
+        margin: 3mm 0;
+        line-height: 1.6;
     }
 
     .receipt-prices-row {
         display: flex;
         justify-content: space-between;
-        margin: 3mm 0;
-        font-size: 15pt;
+        margin: 2mm 0;
+        font-size: 12pt;
         font-weight: 700;
         color: #000;
     }
 
     .receipt-total {
-        border-top: 4px solid #000;
-        padding-top: 4mm;
-        margin-top: 4mm;
+        border-top: 3px solid #000;
+        padding-top: 2mm;
+        margin-top: 2mm;
         font-weight: 900;
-        font-size: 18pt;
+        font-size: 15pt;
     }
 
     .receipt-notes {
-        border-top: 3px dashed #000;
-        padding-top: 4mm;
-        margin-top: 4mm;
-        font-size: 12pt;
-        line-height: 1.8;
+        border-top: 2px dashed #000;
+        padding-top: 3mm;
+        margin-top: 3mm;
+        font-size: 10pt;
+        line-height: 1.5;
         font-weight: 600;
         color: #000;
     }
 
     .receipt-notes strong {
-        font-size: 13pt;
+        font-size: 11pt;
         display: block;
-        margin-bottom: 2mm;
+        margin-bottom: 1mm;
         font-weight: 900;
     }
 
     .receipt-qr {
         text-align: center;
-        margin: 5mm 0;
-        padding: 5mm 0;
-        border-top: 3px dashed #000;
-        border-bottom: 3px dashed #000;
+        margin: 3mm 0;
+        padding: 3mm 0;
+        border-top: 2px dashed #000;
+        border-bottom: 2px dashed #000;
     }
 
     .receipt-qr img {
-        width: 40mm;
-        height: 40mm;
+        width: 30mm;
+        height: 30mm;
         object-fit: contain;
-        margin-bottom: 2mm;
+        margin-bottom: 1mm;
     }
 
     .receipt-qr p {
-        font-size: 13pt;
-        margin: 2mm 0;
+        font-size: 10pt;
+        margin: 1mm 0;
         font-weight: 900;
         color: #000;
     }
 
     .receipt-footer {
         text-align: center;
-        border-top: 4px dashed #000;
-        padding-top: 5mm;
-        margin-top: 5mm;
-        line-height: 1.8;
+        border-top: 2px dashed #000;
+        padding-top: 3mm;
+        margin-top: 3mm;
+        line-height: 1.5;
     }
 
     .receipt-footer p {
-        margin: 2mm 0;
+        margin: 1mm 0;
         font-weight: 900;
-        font-size: 13pt;
+        font-size: 10pt;
         color: #000;
     }
 
@@ -381,7 +381,7 @@
                 <img src="https://i.ibb.co/Sn1FXhm/IMG-20250109-154942-985.jpg" alt="Siya Shops">
             </div>
             <h1>Siya Shop</h1>
-            <p>سیستەمی چاپی پسوڵە</p>
+            <p>سیستەمی چاپی پسوڵە - 10×14 cm</p>
         </div>
 
 ```
@@ -446,7 +446,7 @@
         </div>
     </div>
 
-    <!-- RECEIPT - ULTRA LARGE & CLEAR -->
+    <!-- STICKER RECEIPT - 100mm × 140mm -->
     <div class="receipt" id="receipt">
         <div class="receipt-content">
             <!-- Logo -->
@@ -460,8 +460,7 @@
                 <p>شۆپی سییا</p>
                 <p><strong>07702149727</strong></p>
                 <p>سلێمانی: ئاشتی</p>
-                <p>فەرعی کۆڵانە پانەکەی</p>
-                <p>هۆڵی ئەجێ خانم</p>
+                <p>فەرعی کۆڵانە پانەکەی هۆڵی ئەجێ خانم</p>
             </div>
 
             <!-- Info -->
@@ -528,7 +527,7 @@
             <!-- Footer -->
             <div class="receipt-footer">
                 <p><strong>سوپاس بۆ کڕینەکەت!</strong></p>
-                <p><strong>Thank you!</strong></p>
+                <p><strong>Thank you for your purchase!</strong></p>
                 <p><strong>Since 2019</strong></p>
             </div>
         </div>
