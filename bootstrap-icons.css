@@ -1,0 +1,35 @@
+/* Bootstrap Icons - Local Copy */
+/* This is a minimal Bootstrap Icons CSS to fix the styling issues */
+
+/* Icon base styles */
+.bi {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Specific icons using Unicode characters */
+.bi-plus-circle::before {
+    content: "➕";
+    font-size: 1.2em;
+}
+
+.bi-pencil::before {
+    content: "✏️";
+    font-size: 1.1em;
+}
+
+.bi-trash::before {
+    content: "🗑️";
+    font-size: 1.1em;
+}
+
+.bi-eye::before {
+    content: "👁️";
+    font-size: 1.1em;
+}
