@@ -1,0 +1,11 @@
+-- Authors table
+CREATE TABLE IF NOT EXISTS authors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE
+);
+
+-- Translators table
+CREATE TABLE IF NOT EXISTS translators (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE
+);

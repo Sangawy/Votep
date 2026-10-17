@@ -1,0 +1,12 @@
+/backups/
+/uploads/
+/setup_files/
+/updates/
+*.exe
+*.zip
+*.zip.*
+*.tar.gz
+*.tmp
+*.log
+.vscode/
+scratch/
